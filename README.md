@@ -6,6 +6,8 @@ A plugin to access native barcode plugins as view for flutter.
 
 Right now only available for android, ios is comming soon. Usage can be seen in the example folder:
 
+Requires androidx and kotlin
+
 ```dart
 
 import 'package:barcode_platform_view/barcode_scanner_view.dart';
