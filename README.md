@@ -1,6 +1,7 @@
 # barcode_platform_view
 
 A plugin to access native barcode plugins as view for flutter.
+This allows you to read 2d barcodes and QR codes!
 
 ## Getting Started
 
