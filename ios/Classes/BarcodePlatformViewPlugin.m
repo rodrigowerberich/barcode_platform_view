@@ -1,8 +1,14 @@
 #import "BarcodePlatformViewPlugin.h"
-#import <barcode_platform_view/barcode_platform_view-Swift.h>
+#import "FlutterBarcodeScan.h"
 
 @implementation BarcodePlatformViewPlugin
+// + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
+//   [SwiftBarcodePlatformViewPlugin registerWithRegistrar:registrar];
+// }
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftBarcodePlatformViewPlugin registerWithRegistrar:registrar];
+  FlutterBarcodeScanFactory* barcodeScanFactory =
+      [[FlutterBarcodeScanFactory alloc] initWithMessenger:registrar.messenger];
+  [registrar registerViewFactory:barcodeScanFactory withId:@"barcodescanner"];
 }
 @end
+
