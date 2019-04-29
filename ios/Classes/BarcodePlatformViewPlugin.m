@@ -1,4 +1,5 @@
 #import "BarcodePlatformViewPlugin.h"
+#import "FlutterBarcodeScan.h"
 
 @implementation BarcodePlatformViewPlugin
 // + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
