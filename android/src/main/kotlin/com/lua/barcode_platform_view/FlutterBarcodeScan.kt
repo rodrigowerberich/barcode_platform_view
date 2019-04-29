@@ -77,7 +77,7 @@ internal constructor(internal var context: Context, internal var registrar: Regi
     private fun getScannerView(registrar: Registrar): me.dm7.barcodescanner.zxing.ZXingScannerView {
         val scannerView = ZXingScannerView(registrar.context())
         scannerView.setAutoFocus(true)
-        scannerView.setAspectTolerance(0.5f)
+        scannerView.setAspectTolerance(1.0f)
         return scannerView
     }
 
