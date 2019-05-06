@@ -4,40 +4,43 @@ import 'package:flutter/material.dart';
 
 typedef void BarcodeScannerControllerCodeReadCallback(String code);
 
-class BarcodeScannerController{
+class BarcodeScannerController {
   MethodChannel _channel;
   BarcodeScannerControllerCodeReadCallback _codeReadCallback;
 
   BarcodeScannerController.init(int id) {
     _channel = new MethodChannel('barcodescanner_$id');
-    _channel.setMethodCallHandler((methodCall){
-      switch(methodCall.method){
-        case "permissionDenied":{
-          break;
-        }
-        case "valueScanned":{
-          var valueScanned = methodCall.arguments;
-          print(valueScanned);
-          if(_codeReadCallback != null) {
-            _codeReadCallback(valueScanned);
+    _channel.setMethodCallHandler((methodCall) {
+      switch (methodCall.method) {
+        case "permissionDenied":
+          {
+            break;
           }
-          break;
-        }
+        case "valueScanned":
+          {
+            var valueScanned = methodCall.arguments;
+            print(valueScanned);
+            if (_codeReadCallback != null) {
+              _codeReadCallback(valueScanned);
+            }
+            break;
+          }
       }
     });
   }
 
-  void addBarcodeScannerReadCallback(BarcodeScannerControllerCodeReadCallback codeReadCallback){
+  void addBarcodeScannerReadCallback(
+      BarcodeScannerControllerCodeReadCallback codeReadCallback) {
     _codeReadCallback = codeReadCallback;
   }
 
-  Future<void> startCamera() async => await _channel.invokeMethod('startCamera');
+  Future<void> startCamera() async =>
+      await _channel.invokeMethod('startCamera');
   Future<void> stopCamera() async => await _channel.invokeMethod('stopCamera');
 }
 
 typedef void BarcodeScannerViewCreatedCallback(
     BarcodeScannerController controller);
-
 
 class BarcodeScannerView extends StatefulWidget {
   final BarcodeScannerViewCreatedCallback onScannerCreated;
@@ -73,10 +76,9 @@ class _BarcodeScannerState extends State<BarcodeScannerView> {
   }
 
   Future<void> onPlatformViewCreated(id) async {
-    if (widget.onScannerCreated == null){
+    if (widget.onScannerCreated == null) {
       return;
     }
     widget.onScannerCreated(new BarcodeScannerController.init(id));
   }
 }
-

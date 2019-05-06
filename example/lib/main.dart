@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 new Container(
                   child: scannerView,
-                  height: 300,
+                  height: 400,
                   padding: const EdgeInsets.all(8.0),
                 ),
                 new Text(barcode),

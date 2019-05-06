@@ -1,11 +1,17 @@
 PODS:
   - barcode_platform_view (0.0.1):
     - Flutter
+    - MTBBarcodeScanner
   - Flutter (1.0.0)
+  - MTBBarcodeScanner (5.0.11)
 
 DEPENDENCIES:
   - barcode_platform_view (from `.symlinks/plugins/barcode_platform_view/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MTBBarcodeScanner
 
 EXTERNAL SOURCES:
   barcode_platform_view:
@@ -14,9 +20,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
 
 SPEC CHECKSUMS:
-  barcode_platform_view: f74ee4ad95f53ea648a20959bcd5f3bee9f09252
+  barcode_platform_view: 9dc92efd271cb8f289c01198fd7a924089b7471c
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
 
-PODFILE CHECKSUM: ebd43b443038e611b86ede96e613bd6033c49497
+PODFILE CHECKSUM: a59d9202fff3d26ca80469b252c38071e82dbfed
 
 COCOAPODS: 1.6.1
