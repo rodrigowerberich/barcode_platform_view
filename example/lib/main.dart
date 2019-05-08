@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String barcode = "Ainda nao estou lendo";
+  GlobalKey _keyQR = GlobalKey();
 
   BarcodeScannerController scannerController;
 
@@ -25,6 +26,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     BarcodeScannerView scannerView = new BarcodeScannerView(
+      key: _keyQR,
       onScannerCreated: onScannerCreated,
     );
 
@@ -38,7 +40,7 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 new Container(
                   child: scannerView,
-                  height: 400,
+                  height: 420,
                   padding: const EdgeInsets.all(8.0),
                 ),
                 new Text(barcode),
@@ -56,8 +58,10 @@ class _MyAppState extends State<MyApp> {
 
   void onScannerCreated(scannerController){
     this.scannerController = scannerController;
+    this.scannerController.setDimensions(_keyQR);
     this.scannerController.startCamera();
     this.scannerController.addBarcodeScannerReadCallback(codeRead);
+    setState(() {});
   }
 
 }

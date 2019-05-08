@@ -140,6 +140,7 @@
                   binaryMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
   if ([super init]) {
     _viewId = viewId;
+    printf("Height %f Width %f\n", frame.size.height, frame.size.width);
     self.previewView = [[UIView alloc] initWithFrame:frame];
     self.previewView.backgroundColor = [UIColor clearColor];
     self.previewView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -158,7 +159,7 @@
                                  metrics:nil
                                  views:@{@"scanRect": _scanRect}]];
 //    [_scanRect startAnimating];
-//    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.previewView];
+    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.previewView];
     NSString* channelName = [NSString stringWithFormat:@"barcodescanner_%lld", viewId];
     _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
     __weak __typeof__(self) weakSelf = self;
@@ -178,8 +179,12 @@
     if ([[call method] isEqualToString:@"startCamera"]) {
         printf("scanRect start animating\n");
         [_scanRect startAnimating];
-//     [self onStartCamera:call result:result];
-   } else {
+     [self onStartCamera:call result:result];
+    }else if ([[call method] isEqualToString:@"setDimensions"]) {
+        float new_width = [call.arguments[@"width"] floatValue];
+        float new_height = [call.arguments[@"height"] floatValue];
+        self.previewView.frame = CGRectMake(self.previewView.frame.origin.x, self.previewView.frame.origin.y, new_width, new_height);
+    }else {
     result(FlutterMethodNotImplemented);
    }
 }

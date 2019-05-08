@@ -34,8 +34,13 @@ class BarcodeScannerController {
     _codeReadCallback = codeReadCallback;
   }
 
-  Future<void> startCamera() async =>
-      await _channel.invokeMethod('startCamera');
+  Future<void> setDimensions(GlobalKey qrKey) async{
+    final RenderBox renderBoxQR = qrKey.currentContext.findRenderObject();
+    final sizeQr = renderBoxQR.size;
+    print(sizeQr);
+    await _channel.invokeMethod('setDimensions', {"width": renderBoxQR.size.width, "height": renderBoxQR.size.height});
+  }
+  Future<void> startCamera() async => await _channel.invokeMethod('startCamera');
   Future<void> stopCamera() async => await _channel.invokeMethod('stopCamera');
 }
 
@@ -48,7 +53,7 @@ class BarcodeScannerView extends StatefulWidget {
   BarcodeScannerView({
     Key key,
     @required this.onScannerCreated,
-  });
+  }): super(key: key);
 
   @override
   _BarcodeScannerState createState() => _BarcodeScannerState();
