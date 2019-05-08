@@ -53,6 +53,7 @@ class _MyAppState extends State<MyApp> {
   void codeRead(String code){
     barcode = code;
     setState(() { });
+    this.scannerController.setDimensions(_keyQR);
     scannerController.startCamera();
   }
 

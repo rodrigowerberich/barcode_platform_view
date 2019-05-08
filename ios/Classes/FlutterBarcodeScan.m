@@ -180,6 +180,8 @@
         printf("scanRect start animating\n");
         [_scanRect startAnimating];
      [self onStartCamera:call result:result];
+    }else if ([[call method] isEqualToString:@"stopCamera"]) {
+        [self.scanner stopScanning];
     }else if ([[call method] isEqualToString:@"setDimensions"]) {
         float new_width = [call.arguments[@"width"] floatValue];
         float new_height = [call.arguments[@"height"] floatValue];
@@ -202,7 +204,8 @@
                  [self.scanner stopScanning];
                  AVMetadataMachineReadableCodeObject *code = codes.firstObject;
                  if (code) {
-                     NSLog(code.stringValue);
+                     NSLog(@"%@", code.stringValue);
+                     [self->_channel invokeMethod:@"valueScanned" arguments: code.stringValue];
                      //             [self.delegate barcodeScannerViewController:self didScanBarcodeWithResult:code.stringValue];
                      //             [self dismissViewControllerAnimated:NO completion:nil];
                  }
